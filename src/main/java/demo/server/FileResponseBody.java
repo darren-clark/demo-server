@@ -1,9 +1,7 @@
 package demo.server;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.file.Files;
 
 public class FileResponseBody implements HttpResponseBody  {
     private File file;
@@ -14,8 +12,8 @@ public class FileResponseBody implements HttpResponseBody  {
         this.contentType = contentType;
     }
 
-    public FileResponseBody(File file){
-        this(file, "text/plain");
+    public FileResponseBody(File file) throws IOException {
+        this(file, Files.probeContentType(file.toPath()));
     }
 
     @Override

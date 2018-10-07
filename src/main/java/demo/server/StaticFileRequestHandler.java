@@ -1,13 +1,12 @@
 package demo.server;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class StaticFileRequestHandler implements HttpRequestHandler {
 
     @Override
-    public boolean HandleRequest(HttpServerRequest request, HttpServerResponse response) {
+    public boolean HandleRequest(HttpServerRequest request, HttpServerResponse response) throws IOException {
 
         String resourceName;
         if(request.getPath().isEmpty()){
