@@ -10,7 +10,7 @@ public class Main {
         new HttpServerConfig();
         int port = 0; // Could get from args if not lazy.
         var listener = new HttpServerListener(
-                Arrays.asList(new StaticFileRequestHandler()),
+                Arrays.asList(new StaticFileRequestHandler(), new EchoRequestHandler()),
                 new HttpServerParser(),
                 new HttpServerResponseWriter()
         );

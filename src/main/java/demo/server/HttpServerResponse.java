@@ -16,7 +16,13 @@ public class HttpServerResponse {
     public int getStatusCode(){return statusCode;}
     public void setStatusCode(int statusCode) { this.statusCode = statusCode;}
 
-    public HashMap<String,String> getAdditionalHeaders(){return  additionalHeaders;}
+    public HashMap<String,String> getAdditionalHeaders(){
+        if (additionalHeaders == null)
+            additionalHeaders = new HashMap<String,String>();
+
+        return  additionalHeaders;
+    }
+
     public void setAdditionalHeaders(HashMap<String,String> additionalHeaders){ this.additionalHeaders = additionalHeaders;}
 
     public HttpResponseBody getBody() {  return body; }
