@@ -11,8 +11,8 @@ public class HttpServerRequest {
 
 
     public HttpServerRequest() {
-        headers = new HashMap<>();
-        parameters = new HashMap<>();
+        headers = new HashMap<String, String>();
+        parameters = new HashMap<String, String>();
     }
 
 

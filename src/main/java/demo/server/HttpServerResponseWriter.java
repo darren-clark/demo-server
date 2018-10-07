@@ -4,13 +4,14 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 
 public class HttpServerResponseWriter implements  HttpResponseWriter {
-    public void write(OutputStream stream, HttpServerRequest request, HttpServerResponse response) throws IOException {
-        var writer = new OutputStreamWriter(stream, StandardCharsets.UTF_8);
-        writeStatus(writer, request, response);
-        writeCommonHeaders(writer, request, response);
-        writeAdditionalHeaders(writer, request, response);
+    public void write(OutputStream stream, HttpServerResponse response) throws IOException {
+        OutputStreamWriter writer = new OutputStreamWriter(stream, StandardCharsets.UTF_8);
+        writeStatus(writer, response);
+        writeCommonHeaders(writer, response);
+        writeAdditionalHeaders(writer, response);
         writer.write("\r\n");
         writer.flush();
 
@@ -18,11 +19,11 @@ public class HttpServerResponseWriter implements  HttpResponseWriter {
             response.getBody().getStream().transferTo(stream);
     }
 
-    private void writeStatus(OutputStreamWriter writer, HttpServerRequest request, HttpServerResponse response) throws IOException {
-        writer.write(request.getHttpVersion()+" "+response.getStatusCode()+" "+HttpServerStatusMessages.getStatusMessage(response.getStatusCode())+"\r\n");
+    private void writeStatus(OutputStreamWriter writer, HttpServerResponse response) throws IOException {
+        writer.write(response.getHttpVersion()+" "+response.getStatusCode()+" "+HttpServerStatusMessages.getStatusMessage(response.getStatusCode())+"\r\n");
     }
 
-    private void writeCommonHeaders(OutputStreamWriter writer, HttpServerRequest request, HttpServerResponse response) throws IOException {
+    private void writeCommonHeaders(OutputStreamWriter writer,  HttpServerResponse response) throws IOException {
         writeHeader(writer,"X-Server-Name", HttpServerConfig.SERVER_NAME);
         writeHeader(writer, "Date", LocalDate.now());
         writeHeader(writer, "Connection", "Close");
@@ -34,11 +35,11 @@ public class HttpServerResponseWriter implements  HttpResponseWriter {
         }
     }
 
-    private void writeAdditionalHeaders(OutputStreamWriter writer, HttpServerRequest request, HttpServerResponse response) throws IOException {
+    private void writeAdditionalHeaders(OutputStreamWriter writer, HttpServerResponse response) throws IOException {
         HashMap<String,String> headers = response.getAdditionalHeaders();
         if (headers != null){
-            for(var header: headers.entrySet()){
-                writeHeader(writer,header.getKey(), header.getValue());
+            for (Map.Entry<String, String> e : headers.entrySet()) {
+                writeHeader(writer, e.getKey(), e.getValue());
             }
         }
     }

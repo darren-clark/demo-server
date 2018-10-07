@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class HttpServerStatusMessages {
 
-    private static HashMap<Integer, String> statusMessages = new HashMap<>();
+    private static HashMap<Integer, String> statusMessages = new HashMap<Integer, String>();
     static{
         statusMessages.put(100, "Continue");
         statusMessages.put(101, "Switching Protocols");

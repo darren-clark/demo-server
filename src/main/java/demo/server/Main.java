@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         new HttpServerConfig();
         int port = 0; // Could get from args if not lazy.
-        var listener = new HttpServerListener(
+        HttpServerListener listener = new HttpServerListener(
                 Arrays.asList(new StaticFileRequestHandler(), new EchoRequestHandler()),
                 new HttpServerParser(),
                 new HttpServerResponseWriter()

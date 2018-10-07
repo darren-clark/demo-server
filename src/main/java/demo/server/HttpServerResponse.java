@@ -7,10 +7,12 @@ public class HttpServerResponse {
     private int statusCode;
     private HashMap<String, String> additionalHeaders;
     private HttpResponseBody body;
+    private String httpVersion;
 
-    public HttpServerResponse(int statusCode)
+    public HttpServerResponse(int statusCode, String httpVersion)
     {
         this.statusCode = statusCode;
+        this.httpVersion = httpVersion;
     }
 
     public int getStatusCode(){return statusCode;}
@@ -27,4 +29,6 @@ public class HttpServerResponse {
 
     public HttpResponseBody getBody() {  return body; }
     public void setBody(HttpResponseBody body) { this.body = body;}
+
+    public String getHttpVersion() {return  this.httpVersion;}
 }

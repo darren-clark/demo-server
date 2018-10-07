@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class HttpServerConfig {
 
     public static String WEB_ROOT, DEFAULT_FILE, FILE_NOT_FOUND, METHOD_NOT_SUPPORTED, SERVER_NAME;
-    public HashMap<String, String> serverConfig = new HashMap<>();
+    public HashMap<String, String> serverConfig = new HashMap<String,String>();
 
     public HttpServerConfig(){
         loadConfig();
